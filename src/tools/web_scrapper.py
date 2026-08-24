@@ -10,8 +10,10 @@ def open_url(url: str):
         url(str): the url of a website
     
     """
+    try:
+        web_loader = WebBaseLoader(url)
+        document = web_loader.load()
 
-    web_loader = WebBaseLoader(url)
-    document = web_loader.load()
-
-    return document
+        return document
+    except Exception as e:
+        return "Failed to scrape website. Caught error: {e}. Don't try this url again."
