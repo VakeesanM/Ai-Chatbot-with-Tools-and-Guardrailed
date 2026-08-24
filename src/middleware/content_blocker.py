@@ -1,1 +1,2 @@
-from langchain.agents.middleware import Middle
+from langchain.agents.middleware import AgentMiddleware
+
