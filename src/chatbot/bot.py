@@ -1,4 +1,4 @@
-from langchain.agents import create_agent
+from deepagents import create_deep_agent
 from langchain.agents.middleware import SummarizationMiddleware, PIIMiddleware
 from langchain_openai import ChatOpenAI
 from middleware.content_blocker import WordBlockMiddleWare
@@ -38,7 +38,7 @@ class ChatBot():
 
         """
         memory = InMemorySaver()
-        self.agent = create_agent(
+        self.agent = create_deep_agent(
             model=self.model,
             tools=[add, multiply, divide, subtract, root, power, open_url, search, search_news],
             checkpointer=memory,
