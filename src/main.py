@@ -1,5 +1,5 @@
 import streamlit as st
-#from chatbot.bot import ChatBot
+from chatbot.bot import ChatBot
 
 st.set_page_config(page_title="Chatbot with Guardrails", page_icon='🤖')
 st.header("Chatbot with Guardrails - Demo!")
@@ -8,7 +8,7 @@ st.write("It also has a few tools, allowing it solve math problems as well surf 
 
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "AI", "content": "Hi, how can I help you today?"}]
-    #st.session_state.chatbot = ChatBot()
+    st.session_state.chatbot = ChatBot()
 
 
 for message in st.session_state.messages:
@@ -23,8 +23,9 @@ if prompt := st.chat_input("How is it going?"):
 
     
     with st.chat_message("AI"):
-        st.markdown(f"Echo: {prompt}")
-    st.session_state.messages.append({"role": "AI", "content": f"Echo: {prompt}"})
+        response = st.write_stream(st.session_state.chatbot.stream(prompt))
+
+    st.session_state.messages.append({"role": "AI", "content": f"{response}"})
 
     
 

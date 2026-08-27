@@ -1,2 +1,5 @@
 .env
 venv
+src/chatbot/__pycache__
+src/middleware/__pycache__
+src/tools/__pycache__
