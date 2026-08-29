@@ -15,7 +15,11 @@ def multiply(num1, num2):
 @tool
 def divide(dividend, divisor):
     """Divides the dividend by divisor and return the quotient"""
-    return dividend / divisor
+    try: 
+        ans = dividend / divisor
+        return ans
+    except ZeroDivisionError as e:
+        return f"Can't divide {dividend} by 0."
 
 @tool
 def subtract(num1, num2):
