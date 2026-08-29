@@ -4,7 +4,7 @@ from chatbot.bot import ChatBot
 st.set_page_config(page_title="Chatbot with Guardrails", page_icon='🤖')
 st.header("Chatbot with Guardrails - Demo!")
 st.write("This Chatbot agent has memory and guardrails. It can deal with PII info(Credit Card, IP, and Email) and guardrails that can deal with prompt injection to a minor level")
-st.write("It also has a few tools, allowing it solve math problems as well surf the web")
+st.write("It also has a few tools, allowing it solve simple math problems. The first message takes a few moments.")
 
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "AI", "content": "Hi, how can I help you today?"}]
