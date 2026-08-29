@@ -6,11 +6,11 @@ from typing import Any
 class WordBlockMiddleWare(AgentMiddleware):
     def __init__(self, blocked_terms:list[str]):
         super().__init__()
-        self.blocked_terms = blocked_terms
+        self.blocked_terms = [term.lower() for term in blocked_terms]
 
 
     def _get_last_message(self, state: AgentState):
-        for msg in state['messages']:
+        for msg in reversed(state['messages']):
             if isinstance(msg, HumanMessage):
                 return msg.content
 
@@ -28,7 +28,7 @@ class WordBlockMiddleWare(AgentMiddleware):
 
         if block:
             return {
-                "message" : {AIMessage("I am sorry, but your request breaks the guardrails placed on me!")},
+                "messages" : [AIMessage("I am sorry, but your request breaks the guardrails placed on me!")],
                 'jump_to':'end'
             }
 
