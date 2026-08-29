@@ -1,12 +1,12 @@
-from deepagents import create_deep_agent
+from langchain.agents import create_agent
 from langchain.agents.middleware import SummarizationMiddleware, PIIMiddleware
 from langchain_openai import ChatOpenAI
 from middleware.content_blocker import WordBlockMiddleWare
 from langgraph.checkpoint.memory import  InMemorySaver
 
 from tools.math import add, multiply, divide, subtract, root, power
-from tools.web_scrapper import open_url
-from tools.websearch import search, search_news
+#from tools.web_scrapper import open_url
+#from tools.websearch import search, search_news
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -38,9 +38,9 @@ class ChatBot():
 
         """
         memory = InMemorySaver()
-        self.agent = create_deep_agent(
+        self.agent = create_agent(
             model=self.model,
-            tools=[add, multiply, divide, subtract, root, power, open_url, search, search_news],
+            tools=[add, multiply, divide, subtract, root, power],
             checkpointer=memory,
             middleware=[
                 summary_ware,
@@ -49,7 +49,7 @@ class ChatBot():
                 PIIMiddleware(pii_type='ip', strategy='redact'),
                 WordBlockMiddleWare(['ignore instructions', 'system prompt', 'admin', 'disregard the above'])
             ],
-            system_prompt='test'
+            system_prompt= system_prompt
             
         )
         self.config = {
